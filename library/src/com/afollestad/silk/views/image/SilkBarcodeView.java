@@ -41,34 +41,39 @@ public class SilkBarcodeView extends ImageView {
         this.invalidate();
     }
 
+    private Code128 mCode;
+    private RectF mRect;
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if (mData != null && (getMeasuredWidth() > 0 && getMeasuredHeight() > 0)) {
-            Code128 barcode = new Code128();
-            barcode.setData(mData);
-            barcode.setUom(IBarcode.UOM_PIXEL);
-            barcode.setX(getMeasuredWidth());
-            barcode.setY(getMeasuredHeight());
+            if(mCode == null)
+                mCode = new Code128();
+            mCode.setData(mData);
+            mCode.setUom(IBarcode.UOM_PIXEL);
+            mCode.setX(getMeasuredWidth());
+            mCode.setY(getMeasuredHeight());
             // barcode image margins
-            barcode.setLeftMargin(10f);
-            barcode.setRightMargin(10f);
-            barcode.setTopMargin(10f);
-            barcode.setBottomMargin(10f);
+            mCode.setLeftMargin(10f);
+            mCode.setRightMargin(10f);
+            mCode.setTopMargin(10f);
+            mCode.setBottomMargin(10f);
             // barcode image resolution in dpi
-            barcode.setResolution(72);
+            mCode.setResolution(72);
             // space between barcode and barcode encoding data
-            barcode.setTextMargin(6);
-            barcode.setTextColor(AndroidColor.black);
+            mCode.setTextMargin(6);
+            mCode.setTextColor(AndroidColor.black);
             // barcode bar color and background color in Android device
-            barcode.setForeColor(AndroidColor.black);
-            barcode.setBackColor(AndroidColor.white);
+            mCode.setForeColor(AndroidColor.black);
+            mCode.setBackColor(AndroidColor.white);
             /**
              ** specify your barcode drawing area
 	         **/
-            RectF bounds = new RectF(0, 0, 0, 0);
+            if(mRect == null)
+                mRect = new RectF(0, 0, 0, 0);
             try {
-                barcode.drawBarcode(canvas, bounds);
+                mCode.drawBarcode(canvas, mRect);
             } catch (Exception e) {
                 e.printStackTrace();
             }
