@@ -60,7 +60,11 @@ public class SilkHttpException extends Exception {
     public String getMessage() {
         if (isServerResponse()) {
             String message = getStatusCode() + " " + getReasonPhrase();
-            if (mResponseBody != null) message += "\n" + mResponseBody;
+            if (mResponseBody != null) {
+                if(mResponseBody.length() > 100)
+                    message += "\n" + mResponseBody.substring(0, 100);
+                else message += "\n" + mResponseBody;
+            }
             return message;
         }
         return super.getMessage();
