@@ -56,13 +56,15 @@ public class SilkHttpException extends Exception {
         return mResponseBody;
     }
 
+    private final static int RESPONSE_BODY_LOG_THRESHOLD = 150;
+
     @Override
     public String getMessage() {
         if (isServerResponse()) {
             String message = getStatusCode() + " " + getReasonPhrase();
             if (mResponseBody != null) {
-                if(mResponseBody.length() > 100)
-                    message += "\n" + mResponseBody.substring(0, 100);
+                if (mResponseBody.length() > RESPONSE_BODY_LOG_THRESHOLD)
+                    message += "\n" + mResponseBody.substring(0, RESPONSE_BODY_LOG_THRESHOLD) + "\n... (response body truncated for log)";
                 else message += "\n" + mResponseBody;
             }
             return message;
