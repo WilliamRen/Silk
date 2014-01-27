@@ -67,7 +67,7 @@ android {
 }
 
 dependencies {
-	compile 'com.afollestad.cardsui:library:1.0-SNAPSHOT'
+	compile 'com.afollestad.silk:library:1.0-SNAPSHOT'
 }
 
 ```
