@@ -20,8 +20,10 @@ public abstract class SilkCursorFeedFragment<ItemType extends SilkCursorItem & S
         setLoadComplete(false);
         if (items == null || items.size() == 0) return;
         ContentResolver resolver = getActivity().getContentResolver();
-        for (ItemType item : items)
+        for (ItemType item : items) {
+            if (item.getContentValues() == null) continue;
             resolver.insert(getLoaderUri(), item.getContentValues());
+        }
         super.onInitialRefresh();
     }
 
