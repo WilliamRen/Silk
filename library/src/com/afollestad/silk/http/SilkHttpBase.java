@@ -136,8 +136,10 @@ class SilkHttpBase {
 
     public final void shutdown() {
         reset();
-        mClient.getConnectionManager().shutdown();
-        mClient = null;
-        log("Client has been shutdown.");
+        if (mClient != null) {
+            mClient.getConnectionManager().shutdown();
+            mClient = null;
+            log("Client has been shutdown.");
+        }
     }
 }
