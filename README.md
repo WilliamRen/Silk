@@ -74,6 +74,9 @@ dependencies {
 * At the root of your project directory, run `./gradlew build`. You should see `:<ProjectName>:prepareComAfollestadSilkLibrary10SNAPSHOTLibrary` or something like it in the output and `BUILD SUCCESSFUL` at the end.
 * You're done. You can now use Silk in your app.
 
+Note: There is a [bug](https://code.google.com/p/android/issues/detail?id=63908) in gradle 1.9 which prevents it to find `mavenLocal()`. Use `maven {   url "${System.env.HOME}/.m2/repository" }` instead.
+
+
 Tutorial
 =======
 Coming soon.
